@@ -64,8 +64,8 @@ tabs.forEach(tab => {
 })
 
 /*==================== SERVICES MODAL ====================*/
-const modalViews = document.querySelectorAll('.services__modal')
 const modalBtns = document.querySelectorAll('.services__button')
+const modalViews = document.querySelectorAll('.services__modal')
 const modalCloses = document.querySelectorAll('.services__modal-close')
 
 let modal = function (modalClick) {
@@ -87,13 +87,59 @@ modalCloses.forEach((modalClose) => {
 })
 
 /*==================== PORTFOLIO SWIPER  ====================*/
+let swiperPort = new Swiper('.portfolio__container', {
+    cssMode: true,
+    loop: true,
 
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    pagination: {
+      el: ".swiper-pagination",
+      clickabel: true,
+    },
+    mousewheel: true,
+  });
 
 /*==================== TESTIMONIAL ====================*/
+let swiperTest = new Swiper('.testimonial__container', {
+    loop: true,
+    grabCursor: true,
+    spaceBetween: 48,
 
+    pagination: {
+      el: ".swiper-pagination",
+      clickabel: true,
+      dynamicBullets: true,
+    },
+    breakpoints: {
+        568:{
+            slidesPerView:2,
+        }
+    },
+    mousewheel: true,
+  });
 
 /*==================== SCROLL SECTIONS ACTIVE LINK ====================*/
+const sections = document.querySelectorAll('section[id]')
 
+function scrollActive(){
+    const scrollY = window.pageYOffset
+
+    sections.forEach(current =>{
+        const sectionHeight = current.offsetHeight
+        const sectionTop = current.offsetTop - 50;
+        sectionId = current.getAttribute('id')
+
+        if(scrollY > sectionTop && scrollY <= sectionTop + sectionHeight){
+            document.querySelector('.nav__menu a[href*=' + sectionId + ']').classList.add('active-link')
+        }else{
+            document.querySelector('.nav__menu a[href*=' + sectionId + ']').classList.remove('active-link')
+        }
+    })
+}
+window.addEventListener('scroll', scrollActive)
 
 /*==================== CHANGE BACKGROUND HEADER ====================*/
 
